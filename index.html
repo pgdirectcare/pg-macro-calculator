@@ -519,6 +519,58 @@ body {
     </div>
   </div>
 </div>
+<div style="background:linear-gradient(135deg,#f0fae8,#e4f5d8);border-radius:16px;padding:18px;margin-bottom:16px;border-left:4px solid #5AAD3F;box-shadow:0 2px 16px rgba(0,0,0,0.08);">
+  <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:#3d8a2a;margin-bottom:10px;">🎯 Your First Health Milestone</div>
+  <div style="display:flex;gap:10px;margin-bottom:10px;">
+    <div style="flex:1;background:white;border-radius:10px;padding:10px;text-align:center;box-shadow:0 1px 6px rgba(0,0,0,0.06);">
+      <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:24px;color:#5AAD3F;" id="r-5pct">--</div>
+      <div style="font-size:11px;font-weight:700;color:#718096;">5% of your weight</div>
+    </div>
+    <div style="flex:1;background:white;border-radius:10px;padding:10px;text-align:center;box-shadow:0 1px 6px rgba(0,0,0,0.06);">
+      <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:24px;color:#5AAD3F;" id="r-10pct">--</div>
+      <div style="font-size:11px;font-weight:700;color:#718096;">10% of your weight</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#4a5568;line-height:1.6;">Losing just 5–10% of your body weight can significantly improve: <span style="display:inline-block;background:white;border-radius:20px;padding:3px 10px;margin:2px;font-size:11px;font-weight:700;color:#3d8a2a;">❤️ Blood Pressure</span><span style="display:inline-block;background:white;border-radius:20px;padding:3px 10px;margin:2px;font-size:11px;font-weight:700;color:#3d8a2a;">🩸 Blood Sugar</span><span style="display:inline-block;background:white;border-radius:20px;padding:3px 10px;margin:2px;font-size:11px;font-weight:700;color:#3d8a2a;">💊 Cholesterol</span><span style="display:inline-block;background:white;border-radius:20px;padding:3px 10px;margin:2px;font-size:11px;font-weight:700;color:#3d8a2a;">😴 Sleep</span><span style="display:inline-block;background:white;border-radius:20px;padding:3px 10px;margin:2px;font-size:11px;font-weight:700;color:#3d8a2a;">🦵 Joint Pain</span></div>
+</div>
+<div style="background:white;border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 2px 16px rgba(0,0,0,0.08);">
+  <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:#2B5BA8;margin-bottom:14px;">📅 Your Weight Loss Timeline</div>
+  <div style="display:flex;gap:10px;margin-bottom:14px;align-items:flex-end;">
+    <div style="flex:1;">
+      <label style="display:block;font-size:12px;font-weight:700;color:#718096;margin-bottom:6px;">Your Goal Weight (lbs)</label>
+      <input type="number" id="goal-wt" placeholder="e.g. 180" style="display:block;width:100%;padding:12px 14px;font-size:16px;font-family:'Lato',sans-serif;color:#1a2744;background:#f0f4f9;border:2px solid #c8d4e4;border-radius:10px;outline:none;">
+    </div>
+    <button id="timeline-btn" style="padding:12px 16px;background:#2B5BA8;color:white;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;cursor:pointer;white-space:nowrap;">Calculate</button>
+  </div>
+  <div id="timeline-res" style="display:none;">
+    <div style="background:linear-gradient(135deg,#ebf4ff,#dbeafe);border-radius:12px;padding:16px;text-align:center;margin-bottom:14px;">
+      <div style="font-size:14px;font-weight:700;color:#4a5568;margin-bottom:4px;">Estimated time to reach your goal</div>
+      <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:48px;color:#2B5BA8;line-height:1;" id="t-months">--</div>
+      <div style="font-size:14px;font-weight:700;color:#4a5568;margin-bottom:4px;">months</div>
+      <div style="font-size:12px;color:#718096;" id="t-sub"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div style="background:#f0f4f9;border-radius:10px;padding:10px;text-align:center;">
+        <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:16px;color:#2B5BA8;">1 mo</div>
+        <div style="font-size:11px;font-weight:700;color:#5AAD3F;" id="t-1mo">--</div>
+        <div style="font-size:10px;color:#a0aec0;">lost</div>
+      </div>
+      <div style="background:#f0f4f9;border-radius:10px;padding:10px;text-align:center;">
+        <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:16px;color:#2B5BA8;">3 mo</div>
+        <div style="font-size:11px;font-weight:700;color:#5AAD3F;" id="t-3mo">--</div>
+        <div style="font-size:10px;color:#a0aec0;">lost</div>
+      </div>
+      <div style="background:#f0f4f9;border-radius:10px;padding:10px;text-align:center;">
+        <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:16px;color:#2B5BA8;">6 mo</div>
+        <div style="font-size:11px;font-weight:700;color:#5AAD3F;" id="t-6mo">--</div>
+        <div style="font-size:10px;color:#a0aec0;">lost</div>
+      </div>
+    </div>
+    <div style="background:#0d2347;border-radius:12px;padding:14px 16px;text-align:center;">
+      <p style="font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:#ffffff;line-height:1.4;" id="t-msg"></p>
+    </div>
+  </div>
+</div>
 
     <div class="disc">⚠️ These targets are personalized to your body and goals.  For adjustments based on your medications or health history, reach out to your provider anytime.</div>​​​
 <script>
@@ -577,6 +629,35 @@ window.addEventListener('DOMContentLoaded', function() {
 document.getElementById('r-bottles').textContent = Math.round(water / 16);
 document.getElementById('r-liters').textContent = (water * 0.0296).toFixed(1);
     document.getElementById('r-sugar').textContent = (sex === 'male') ? 36 : 25;
+document.getElementById('r-5pct').textContent = Math.round(wt * 0.05) + ' lbs';
+document.getElementById('r-10pct').textContent = Math.round(wt * 0.10) + ' lbs';
+
+document.getElementById('timeline-btn').addEventListener('click', function() {
+  var goalWt = parseFloat(document.getElementById('goal-wt').value);
+  if (!goalWt || goalWt >= wt) {
+    alert('Please enter a goal weight lower than your current weight.');
+    return;
+  }
+  var tolose = wt - goalWt;
+  var monthsNeeded = Math.round(tolose / 4.3);
+  document.getElementById('t-months').textContent = monthsNeeded;
+  document.getElementById('t-sub').textContent = 'losing ~' + tolose + ' lbs at 1 lb/week pace';
+  document.getElementById('t-1mo').textContent = Math.min(4, tolose) + ' lbs';
+  document.getElementById('t-3mo').textContent = Math.min(13, tolose) + ' lbs';
+  document.getElementById('t-6mo').textContent = Math.min(26, tolose) + ' lbs';
+  var msg;
+  if (monthsNeeded <= 3) {
+    msg = 'You\'re so close — this is absolutely achievable!';
+  } else if (monthsNeeded <= 6) {
+    msg = 'Six months of consistency will transform your health.';
+  } else if (monthsNeeded <= 12) {
+    msg = 'One year from now you\'ll be glad you started today.';
+  } else {
+    msg = 'Every pound lost improves your health. Progress beats perfection.';
+  }
+  document.getElementById('t-msg').textContent = msg;
+  document.getElementById('timeline-res').style.display = 'block';
+});
 
 
     document.getElementById('bmi-val').textContent = bmi;
