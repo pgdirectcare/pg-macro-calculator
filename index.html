@@ -465,8 +465,8 @@ color: #a0aec0;
 <div class="field">
   <label>Biological Sex</label>
   <div class="gender-row">
-    <button class="gbtn on" id="bm" onclick="sg('male')">Male</button>
-    <button class="gbtn" id="bf" onclick="sg('female')">Female</button>
+    <button class="gbtn on" id="bm">Male</button>
+    <button class="gbtn" id="bf">Female</button>
   </div>
 </div>
 
@@ -501,7 +501,7 @@ color: #a0aec0;
   </div>
 </div>
 
-<button class="btn" onclick="calc()">Calculate My Targets →</button>
+<button class="btn" id="calcbtn">Calculate My Targets →</button>
 ```
 
   </div>
@@ -585,7 +585,7 @@ color: #a0aec0;
 
 <div class="disc">⚠️ These targets are estimates intended as a starting guide only. Your provider may adjust your targets based on your individual health history, medications, and lab results. Always follow your provider's specific recommendations.</div>
 
-<button class="reset" onclick="rst()">← Recalculate</button>
+<button class="reset" id="rstbtn">← Recalculate</button>
 ```
 
   </div>
@@ -596,67 +596,91 @@ color: #a0aec0;
 
 </div>
 <script>
-let sex = 'male';
+var sex = 'male';
 
-function sg(s) {
-sex = s;
-document.getElementById(‘bm’).className = ‘gbtn’ + (s===‘male’?’ on’:’’);
-document.getElementById(‘bf’).className = ‘gbtn’ + (s===‘female’?’ on’:’’);
+window.addEventListener(‘DOMContentLoaded’, function() {
+
+document.getElementById(‘bm’).addEventListener(‘click’, function() {
+sex = ‘male’;
+document.getElementById(‘bm’).className = ‘gbtn on’;
+document.getElementById(‘bf’).className = ‘gbtn’;
+});
+
+document.getElementById(‘bf’).addEventListener(‘click’, function() {
+sex = ‘female’;
+document.getElementById(‘bm’).className = ‘gbtn’;
+document.getElementById(‘bf’).className = ‘gbtn on’;
+});
+
+document.getElementById(‘calcbtn’).addEventListener(‘click’, function() {
+var age = parseFloat(document.getElementById(‘age’).value);
+var ft = parseFloat(document.getElementById(‘ft’).value) || 0;
+var inc = parseFloat(document.getElementById(‘in’).value) || 0;
+var wt = parseFloat(document.getElementById(‘wt’).value);
+var act = parseFloat(document.getElementById(‘act’).value);
+
+```
+if (!age || !ft || !wt || !act) {
+  alert('Please fill in all fields before calculating.');
+  return;
 }
 
-function calc() {
-const age = parseFloat(document.getElementById(‘age’).value);
-const ft = parseFloat(document.getElementById(‘ft’).value)||0;
-const inc = parseFloat(document.getElementById(‘in’).value)||0;
-const wt = parseFloat(document.getElementById(‘wt’).value);
-const act = parseFloat(document.getElementById(‘act’).value);
+var kg = wt * 0.453592;
+var cm = ((ft * 12) + inc) * 2.54;
+var bmr;
+if (sex === 'male') {
+  bmr = (10 * kg) + (6.25 * cm) - (5 * age) + 5;
+} else {
+  bmr = (10 * kg) + (6.25 * cm) - (5 * age) - 161;
+}
 
-if (!age||!ft||!wt||!act) { alert(‘Please fill in all fields.’); return; }
+var tdee = bmr * act;
+var cal = Math.round(tdee - 500);
+var pro = Math.round(wt * 0.85);
+var carb = Math.round((cal * 0.40) / 4);
+var fat = Math.round((cal * 0.30) / 9);
+var water = Math.round(wt * 0.5);
+var hm = cm / 100;
+var bmi = (kg / (hm * hm)).toFixed(1);
 
-const kg = wt * 0.453592;
-const cm = ((ft*12)+inc)*2.54;
-const bmr = sex===‘male’ ? (10*kg)+(6.25*cm)-(5*age)+5 : (10*kg)+(6.25*cm)-(5*age)-161;
-const tdee = bmr * act;
-const cal = Math.round(tdee - 500);
-const pro = Math.round(wt * 0.85);
-const carb = Math.round((cal*0.40)/4);
-const fat = Math.round((cal*0.30)/9);
-const water = Math.round(wt*0.5);
+document.getElementById('r-cal').textContent = cal.toLocaleString();
+document.getElementById('r-pro').textContent = pro;
+document.getElementById('r-carb').textContent = carb;
+document.getElementById('r-fat').textContent = fat;
+document.getElementById('r-water').textContent = water + ' oz';
+document.getElementById('bmi-val').textContent = bmi;
 
-const hm = cm/100;
-const bmi = (kg/(hm*hm)).toFixed(1);
+var cat, cc, cb, ptr;
+if (bmi < 18.5) { cat = 'Underweight'; cc = '#2b6cb0'; cb = '#ebf8ff'; ptr = 5; }
+else if (bmi < 25) { cat = 'Normal Weight'; cc = '#276749'; cb = '#f0fff4'; ptr = 25; }
+else if (bmi < 30) { cat = 'Overweight'; cc = '#744210'; cb = '#fffff0'; ptr = 55; }
+else if (bmi < 35) { cat = 'Obese Class I'; cc = '#c05621'; cb = '#fff5f0'; ptr = 72; }
+else { cat = 'Obese Class II+'; cc = '#9b2c2c'; cb = '#fff5f5'; ptr = 90; }
 
-document.getElementById(‘r-cal’).textContent = cal.toLocaleString();
-document.getElementById(‘r-pro’).textContent = pro;
-document.getElementById(‘r-carb’).textContent = carb;
-document.getElementById(‘r-fat’).textContent = fat;
-document.getElementById(‘r-water’).textContent = water+’ oz’;
-document.getElementById(‘bmi-val’).textContent = bmi;
-
-let cat, cc, cb, ptr;
-if (bmi<18.5){cat=‘Underweight’;cc=’#2b6cb0’;cb=’#ebf8ff’;ptr=5;}
-else if (bmi<25){cat=‘Normal Weight’;cc=’#276749’;cb=’#f0fff4’;ptr=25;}
-else if (bmi<30){cat=‘Overweight’;cc=’#744210’;cb=’#fffff0’;ptr=55;}
-else if (bmi<35){cat=‘Obese Class I’;cc=’#c05621’;cb=’#fff5f0’;ptr=72;}
-else{cat=‘Obese Class II+’;cc=’#9b2c2c’;cb=’#fff5f5’;ptr=90;}
-
-const ce = document.getElementById(‘bmi-cat’);
+var ce = document.getElementById('bmi-cat');
 ce.textContent = cat;
 ce.style.background = cb;
 ce.style.color = cc;
-document.getElementById(‘bmi-dot’).style.left = ptr+’%’;
+document.getElementById('bmi-dot').style.left = ptr + '%';
 
-const r = document.getElementById(‘res’);
-r.className = ‘results show’;
-r.scrollIntoView({behavior:‘smooth’,block:‘start’});
-}
+var r = document.getElementById('res');
+r.className = 'results show';
+r.scrollIntoView({ behavior: 'smooth', block: 'start' });
+```
 
-function rst() {
+});
+
+document.getElementById(‘rstbtn’).addEventListener(‘click’, function() {
 document.getElementById(‘res’).className = ‘results’;
-[‘age’,‘ft’,‘in’,‘wt’].forEach(id=>document.getElementById(id).value=’’);
-document.getElementById(‘act’).value=’’;
-window.scrollTo({top:0,behavior:‘smooth’});
+var fields = [‘age’, ‘ft’, ‘in’, ‘wt’];
+for (var i = 0; i < fields.length; i++) {
+document.getElementById(fields[i]).value = ‘’;
 }
+document.getElementById(‘act’).value = ‘’;
+window.scrollTo({ top: 0, behavior: ‘smooth’ });
+});
+
+});
 </script>
 
 </body>
