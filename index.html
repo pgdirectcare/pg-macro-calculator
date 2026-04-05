@@ -26,6 +26,62 @@
 
 - { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Force all styles to override anything external */
+.page-wrapper, .page-wrapper * {
+-webkit-font-smoothing: antialiased;
+font-family: ‘Lato’, sans-serif;
+}
+
+.card {
+background: #ffffff !important;
+border: 1px solid #e2e8f0 !important;
+}
+
+.card-title {
+color: #2B5BA8 !important;
+}
+
+label {
+color: #4a5568 !important;
+}
+
+input[type=“number”],
+select {
+background: #f4f7fb !important;
+border: 2px solid #cbd5e0 !important;
+color: #1a2744 !important;
+opacity: 1 !important;
+}
+
+input[type=“number”]:focus,
+select:focus {
+border-color: #2B5BA8 !important;
+background: #ffffff !important;
+}
+
+.calc-btn {
+background: linear-gradient(135deg, #5AAD3F 0%, #3d8a2a 100%) !important;
+color: #ffffff !important;
+opacity: 1 !important;
+}
+
+.gender-btn {
+background: #f4f7fb !important;
+border: 2px solid #e2e8f0 !important;
+color: #4a5568 !important;
+opacity: 1 !important;
+}
+
+.gender-btn.active {
+background: #2B5BA8 !important;
+border-color: #2B5BA8 !important;
+color: #ffffff !important;
+}
+
+body, html {
+background: #f4f7fb !important;
+}
+
 html, body {
 font-family: ‘Lato’, sans-serif;
 background: var(–gray-light);
