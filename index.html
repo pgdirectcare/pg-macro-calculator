@@ -5,503 +5,268 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PG Wellness Macro Calculator</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --blue: #2B5BA8;
-    --blue-dark: #1e4280;
-    --blue-light: #3d6ec2;
-    --green: #5AAD3F;
-    --green-dark: #3d8a2a;
-    --green-light: #6fc452;
-    --white: #ffffff;
-    --gray-light: #f4f7fb;
-    --gray: #e2e8f0;
-    --text-dark: #1a2744;
-    --text-mid: #4a5568;
-    --text-light: #718096;
-    --shadow: 0 4px 24px rgba(43,91,168,0.10);
-    --shadow-lg: 0 8px 40px rgba(43,91,168,0.16);
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-- { box-sizing: border-box; margin: 0; padding: 0; }
-
-/* Force all styles to override anything external */
-.page-wrapper, .page-wrapper * {
--webkit-font-smoothing: antialiased;
+body {
 font-family: ‘Lato’, sans-serif;
+background: #eef2f7;
+color: #1a2744;
 }
 
-.card {
-background: #ffffff !important;
-border: 1px solid #e2e8f0 !important;
-}
-
-.card-title {
-color: #2B5BA8 !important;
-}
-
-label {
-color: #4a5568 !important;
-}
-
-input[type=“number”],
-select {
-background: #f4f7fb !important;
-border: 2px solid #cbd5e0 !important;
-color: #1a2744 !important;
-opacity: 1 !important;
-}
-
-input[type=“number”]:focus,
-select:focus {
-border-color: #2B5BA8 !important;
-background: #ffffff !important;
-}
-
-.calc-btn {
-background: linear-gradient(135deg, #5AAD3F 0%, #3d8a2a 100%) !important;
-color: #ffffff !important;
-opacity: 1 !important;
-}
-
-.gender-btn {
-background: #f4f7fb !important;
-border: 2px solid #e2e8f0 !important;
-color: #4a5568 !important;
-opacity: 1 !important;
-}
-
-.gender-btn.active {
-background: #2B5BA8 !important;
-border-color: #2B5BA8 !important;
-color: #ffffff !important;
-}
-
-body, html {
-background: #f4f7fb !important;
-}
-
-html, body {
-font-family: ‘Lato’, sans-serif;
-background: var(–gray-light);
-min-height: 100vh;
-color: var(–text-dark);
-width: 100%;
-margin: 0;
-padding: 0;
-}
-
-.page-wrapper {
-max-width: 600px;
+.wrap {
+max-width: 520px;
 margin: 0 auto;
-background: var(–gray-light);
-min-height: 100vh;
-box-shadow: 0 0 40px rgba(0,0,0,0.08);
 }
 
 /* HEADER */
-.header {
-background: #0d2347 !important;
-padding: 32px 24px 40px;
-text-align: center;
-position: relative;
-overflow: hidden;
+.hdr {
+background: #0d2347;
 border-bottom: 5px solid #5AAD3F;
+padding: 30px 20px 36px;
+text-align: center;
 }
 
-.header::before {
-content: ‘’;
-position: absolute;
-top: -40px; right: -40px;
-width: 180px; height: 180px;
-border-radius: 50%;
-background: rgba(90,173,63,0.15);
-}
-
-.header::after {
-content: ‘’;
-position: absolute;
-bottom: -60px; left: -30px;
-width: 220px; height: 220px;
-border-radius: 50%;
-background: rgba(255,255,255,0.06);
-}
-
-.logo-area {
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 6px;
-margin-bottom: 10px;
-}
-
-.logo-badge {
-background: var(–green);
-color: white;
-font-family: ‘Nunito’, sans-serif;
-font-weight: 900;
-font-size: 20px;
-width: 44px; height: 44px;
-border-radius: 10px;
-display: flex;
-align-items: center;
-justify-content: center;
-box-shadow: 0 2px 12px rgba(90,173,63,0.4);
-flex-shrink: 0;
-}
-
-.brand-name {
+.hdr .brand {
 font-family: ‘Nunito’, sans-serif;
 font-weight: 900;
 font-size: 26px;
-color: #ffffff !important;
-line-height: 1;
-white-space: nowrap;
-text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+color: #ffffff;
+margin-bottom: 2px;
 }
 
-.brand-sub {
-font-size: 12px;
-font-weight: 600;
-color: #ffffff !important;
-opacity: 0.9;
-letter-spacing: 0.3px;
-margin-top: 2px;
+.hdr .tag {
+font-size: 13px;
+color: #a8c4e8;
+margin-bottom: 16px;
 }
 
-.header h1 {
+.hdr h1 {
 font-family: ‘Nunito’, sans-serif;
 font-weight: 900;
 font-size: 28px;
-color: #ffffff !important;
-text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+color: #ffffff;
 margin-bottom: 8px;
-position: relative;
-z-index: 1;
 }
 
-.header p {
+.hdr p {
 font-size: 14px;
-color: #ffffff !important;
-opacity: 0.92;
-text-shadow: 0 1px 6px rgba(0,0,0,0.4);
-position: relative;
-z-index: 1;
-max-width: 320px;
-margin: 0 auto;
+color: #c8d8ee;
 line-height: 1.5;
 }
 
-/* MAIN */
-.container {
-max-width: 480px;
-margin: 0 auto;
+/* BODY */
+.body {
 padding: 20px 16px 40px;
 }
 
 /* CARD */
 .card {
-background: #ffffff !important;
-border-radius: 20px !important;
-padding: 24px 20px !important;
-box-shadow: 0 4px 24px rgba(43,91,168,0.10) !important;
-margin-bottom: 16px !important;
-width: 100% !important;
-box-sizing: border-box !important;
+background: #ffffff;
+border-radius: 16px;
+padding: 22px 18px;
+margin-bottom: 16px;
+box-shadow: 0 2px 16px rgba(0,0,0,0.08);
 }
 
 .card-title {
 font-family: ‘Nunito’, sans-serif;
 font-weight: 800;
-font-size: 16px;
-color: var(–blue);
+font-size: 17px;
+color: #2B5BA8;
+margin-bottom: 20px;
+}
+
+/* FIELDS */
+.field {
 margin-bottom: 18px;
-display: flex;
-align-items: center;
-gap: 8px;
 }
 
-.card-title .icon {
-width: 28px; height: 28px;
-border-radius: 8px;
-background: var(–gray-light);
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 14px;
-}
-
-/* FORM FIELDS */
-.field-group {
-margin-bottom: 16px !important;
-width: 100% !important;
-}
-
-label {
+.field label {
 display: block;
-font-size: 13px;
+font-size: 14px;
 font-weight: 700;
-color: var(–text-mid);
-margin-bottom: 6px;
-letter-spacing: 0.3px;
+color: #4a5568;
+margin-bottom: 8px;
 }
 
-input[type=“number”],
-select {
-width: 100% !important;
-min-width: 100% !important;
-padding: 14px 16px !important;
-border: 2px solid #cbd5e0 !important;
-border-radius: 12px !important;
-font-size: 16px !important;
-font-family: ‘Lato’, sans-serif !important;
-color: #1a2744 !important;
-background: #f4f7fb !important;
-transition: border-color 0.2s, background 0.2s;
-appearance: none !important;
--webkit-appearance: none !important;
-display: block !important;
-box-sizing: border-box !important;
-}
-
-input[type=“number”]:focus,
-select:focus {
+.field input,
+.field select {
+display: block;
+width: 100%;
+padding: 14px 16px;
+font-size: 16px;
+font-family: ‘Lato’, sans-serif;
+color: #1a2744;
+background: #f0f4f9;
+border: 2px solid #c8d4e4;
+border-radius: 10px;
 outline: none;
-border-color: var(–blue);
-background: white;
+-webkit-appearance: none;
+appearance: none;
 }
 
-.select-wrap {
+.field input:focus,
+.field select:focus {
+border-color: #2B5BA8;
+background: #ffffff;
+}
+
+.field input::placeholder {
+color: #a0aec0;
+}
+
+.two-col {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+}
+
+/* GENDER BUTTONS */
+.gender-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+}
+
+.gbtn {
+display: block;
+width: 100%;
+padding: 13px;
+font-family: ‘Nunito’, sans-serif;
+font-weight: 800;
+font-size: 15px;
+text-align: center;
+border: 2px solid #c8d4e4;
+border-radius: 10px;
+background: #f0f4f9;
+color: #4a5568;
+cursor: pointer;
+}
+
+.gbtn.on {
+background: #2B5BA8;
+border-color: #2B5BA8;
+color: #ffffff;
+}
+
+/* SELECT WRAPPER */
+.sel-wrap {
 position: relative;
 }
 
-.select-wrap::after {
+.sel-wrap::after {
 content: ‘▾’;
 position: absolute;
 right: 14px;
 top: 50%;
 transform: translateY(-50%);
-color: var(–blue);
-font-size: 14px;
+color: #2B5BA8;
 pointer-events: none;
-}
-
-.height-row {
-display: grid !important;
-grid-template-columns: 1fr 1fr !important;
-gap: 10px !important;
-width: 100% !important;
-}
-
-.gender-row {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 10px;
-}
-
-.gender-btn {
-padding: 11px;
-border: 2px solid var(–gray);
-border-radius: 12px;
-background: var(–gray-light);
 font-size: 14px;
-font-weight: 700;
-font-family: ‘Nunito’, sans-serif;
-color: var(–text-mid);
-cursor: pointer;
-transition: all 0.2s;
-text-align: center;
 }
 
-.gender-btn.active {
-border-color: var(–blue);
-background: var(–blue);
-color: white;
-}
-
-/* CALCULATE BUTTON */
-.calc-btn {
+/* BUTTON */
+.btn {
+display: block;
 width: 100%;
-padding: 15px;
-background: linear-gradient(135deg, var(–green) 0%, var(–green-dark) 100%);
-color: white;
-border: none;
-border-radius: 14px;
+padding: 16px;
+background: #5AAD3F;
+color: #ffffff;
 font-family: ‘Nunito’, sans-serif;
 font-weight: 900;
-font-size: 17px;
+font-size: 18px;
+border: none;
+border-radius: 12px;
 cursor: pointer;
-letter-spacing: 0.3px;
-box-shadow: 0 4px 16px rgba(90,173,63,0.35);
-transition: transform 0.15s, box-shadow 0.15s;
-margin-top: 4px;
-}
-
-.calc-btn:active {
-transform: translateY(1px);
-box-shadow: 0 2px 8px rgba(90,173,63,0.25);
+margin-top: 6px;
+box-shadow: 0 4px 14px rgba(90,173,63,0.35);
 }
 
 /* RESULTS */
-.results {
-display: none;
-}
+.results { display: none; }
+.results.show { display: block; }
 
-.results.visible {
-display: block;
-animation: fadeUp 0.4s ease;
-}
-
-@keyframes fadeUp {
-from { opacity: 0; transform: translateY(16px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-.results-header {
-background: linear-gradient(135deg, var(–green) 0%, var(–green-dark) 100%);
-border-radius: 16px;
-padding: 18px 20px;
+.success-bar {
+background: #5AAD3F;
+border-radius: 14px;
+padding: 16px 18px;
 margin-bottom: 16px;
 display: flex;
 align-items: center;
 gap: 12px;
-box-shadow: 0 4px 16px rgba(90,173,63,0.25);
 }
 
-.results-header .check {
-width: 40px; height: 40px;
-background: rgba(255,255,255,0.2);
+.success-bar .chk {
+width: 38px; height: 38px;
+background: rgba(255,255,255,0.25);
 border-radius: 50%;
 display: flex;
 align-items: center;
 justify-content: center;
 font-size: 20px;
 flex-shrink: 0;
+color: white;
 }
 
-.results-header h3 {
+.success-bar h3 {
 font-family: ‘Nunito’, sans-serif;
 font-weight: 800;
-font-size: 16px;
-color: white;
+font-size: 15px;
+color: #ffffff;
 margin-bottom: 2px;
 }
 
-.results-header p {
-font-size: 13px;
+.success-bar p {
+font-size: 12px;
 color: rgba(255,255,255,0.85);
 }
 
-/* MACRO GRID */
-.macro-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 12px;
-margin-bottom: 16px;
-}
-
-.macro-card {
-background: white;
+/* BMI */
+.bmi-card {
+background: #ffffff;
 border-radius: 16px;
-padding: 16px 14px;
-box-shadow: var(–shadow);
-text-align: center;
-border-top: 3px solid var(–blue);
-transition: transform 0.2s;
-}
-
-.macro-card:hover {
-transform: translateY(-2px);
-}
-
-.macro-card.calories {
-grid-column: 1 / -1;
-border-top-color: var(–green);
-background: linear-gradient(135deg, #f0f9eb 0%, #e8f5e0 100%);
-}
-
-.macro-card .value {
-font-family: ‘Nunito’, sans-serif;
-font-weight: 900;
-font-size: 28px;
-color: var(–blue);
-line-height: 1;
-margin-bottom: 4px;
-}
-
-.macro-card.calories .value {
-font-size: 36px;
-color: var(–green-dark);
-}
-
-.macro-card .unit {
-font-size: 13px;
-font-weight: 700;
-color: var(–text-light);
-margin-bottom: 6px;
-}
-
-.macro-card .macro-label {
-font-size: 12px;
-font-weight: 700;
-color: var(–text-mid);
-letter-spacing: 0.5px;
-text-transform: uppercase;
-}
-
-.macro-card .macro-desc {
-font-size: 11px;
-color: var(–text-light);
-margin-top: 3px;
-}
-
-/* BMI DISPLAY */
-.bmi-bar-wrap {
-background: white;
-border-radius: 16px;
-padding: 18px 16px;
-box-shadow: var(–shadow);
+padding: 18px;
 margin-bottom: 16px;
+box-shadow: 0 2px 16px rgba(0,0,0,0.08);
 }
 
 .bmi-top {
 display: flex;
 justify-content: space-between;
-align-items: center;
-margin-bottom: 12px;
+align-items: flex-start;
+margin-bottom: 14px;
 }
 
-.bmi-value-wrap {
-display: flex;
-align-items: baseline;
-gap: 4px;
-}
-
-.bmi-value {
+.bmi-num {
 font-family: ‘Nunito’, sans-serif;
 font-weight: 900;
-font-size: 32px;
-color: var(–blue);
+font-size: 36px;
+color: #2B5BA8;
+line-height: 1;
 }
 
-.bmi-label-main {
-font-family: ‘Nunito’, sans-serif;
-font-weight: 800;
-font-size: 13px;
-color: var(–text-mid);
+.bmi-lbl {
+font-size: 12px;
+font-weight: 700;
+color: #718096;
+margin-top: 2px;
 }
 
-.bmi-category {
-display: inline-block;
-padding: 4px 12px;
+.bmi-cat {
+padding: 5px 14px;
 border-radius: 20px;
 font-size: 12px;
 font-weight: 700;
 font-family: ‘Nunito’, sans-serif;
 }
 
-.bmi-track {
+.bmi-bar {
 height: 8px;
 border-radius: 99px;
 background: linear-gradient(to right, #63b3ed, #68d391, #f6e05e, #fc8181, #e53e3e);
@@ -509,89 +274,141 @@ position: relative;
 margin-bottom: 8px;
 }
 
-.bmi-pointer {
+.bmi-dot {
 position: absolute;
-top: -4px;
-width: 16px; height: 16px;
+top: -5px;
+width: 18px; height: 18px;
 border-radius: 50%;
-background: var(–blue);
-border: 2px solid white;
-box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+background: #2B5BA8;
+border: 3px solid white;
+box-shadow: 0 2px 6px rgba(0,0,0,0.25);
 transform: translateX(-50%);
-transition: left 0.5s ease;
+transition: left 0.5s;
 }
 
-.bmi-scale-labels {
+.bmi-scale {
 display: flex;
 justify-content: space-between;
 font-size: 10px;
-color: var(–text-light);
+color: #a0aec0;
 font-weight: 700;
 }
 
-/* PROTEIN HIGHLIGHT */
-.protein-highlight {
-background: linear-gradient(135deg, #ebf4ff 0%, #dbeafe 100%);
-border-radius: 14px;
-padding: 14px 16px;
+/* MACRO GRID */
+.mgrid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
 margin-bottom: 16px;
-border-left: 4px solid var(–blue);
 }
 
-.protein-highlight h4 {
+.mc {
+background: #ffffff;
+border-radius: 14px;
+padding: 16px 12px;
+text-align: center;
+box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+border-top: 3px solid #2B5BA8;
+}
+
+.mc.cal {
+grid-column: 1 / -1;
+border-top-color: #5AAD3F;
+background: linear-gradient(135deg, #f0fae8, #e4f5d8);
+}
+
+.mc .val {
+font-family: ‘Nunito’, sans-serif;
+font-weight: 900;
+font-size: 30px;
+color: #2B5BA8;
+line-height: 1;
+margin-bottom: 3px;
+}
+
+.mc.cal .val {
+font-size: 38px;
+color: #3d8a2a;
+}
+
+.mc .unit {
+font-size: 12px;
+font-weight: 700;
+color: #a0aec0;
+margin-bottom: 5px;
+}
+
+.mc .name {
+font-size: 11px;
+font-weight: 700;
+color: #4a5568;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.mc .desc {
+font-size: 10px;
+color: #a0aec0;
+margin-top: 2px;
+}
+
+/* PROTEIN TIP */
+.tip {
+background: #ebf4ff;
+border-left: 4px solid #2B5BA8;
+border-radius: 12px;
+padding: 14px 16px;
+margin-bottom: 16px;
+}
+
+.tip h4 {
 font-family: ‘Nunito’, sans-serif;
 font-weight: 800;
 font-size: 13px;
-color: var(–blue);
+color: #2B5BA8;
 margin-bottom: 4px;
 }
 
-.protein-highlight p {
+.tip p {
 font-size: 12px;
-color: var(–text-mid);
+color: #4a5568;
 line-height: 1.5;
 }
 
-/* WATER ROW */
-.water-row {
-background: white;
+/* WATER */
+.water {
+background: #ffffff;
 border-radius: 14px;
 padding: 14px 16px;
-box-shadow: var(–shadow);
 display: flex;
 align-items: center;
-gap: 14px;
+gap: 12px;
 margin-bottom: 16px;
+box-shadow: 0 2px 16px rgba(0,0,0,0.08);
 }
 
-.water-icon {
-font-size: 28px;
-flex-shrink: 0;
-}
+.water .ico { font-size: 28px; }
 
-.water-text h4 {
+.water h4 {
 font-family: ‘Nunito’, sans-serif;
 font-weight: 800;
 font-size: 14px;
-color: var(–blue);
+color: #2B5BA8;
 }
 
-.water-text p {
-font-size: 12px;
-color: var(–text-light);
-}
+.water p { font-size: 12px; color: #a0aec0; }
 
-.water-amount {
+.water .amt {
 margin-left: auto;
 font-family: ‘Nunito’, sans-serif;
 font-weight: 900;
 font-size: 22px;
-color: var(–blue);
+color: #2B5BA8;
 white-space: nowrap;
 }
 
 /* DISCLAIMER */
-.disclaimer {
+.disc {
 background: #fffbeb;
 border: 1px solid #fde68a;
 border-radius: 12px;
@@ -603,136 +420,115 @@ margin-bottom: 16px;
 }
 
 /* RESET */
-.reset-btn {
+.reset {
+display: block;
 width: 100%;
 padding: 12px;
 background: transparent;
-border: 2px solid var(–gray);
+border: 2px solid #c8d4e4;
 border-radius: 12px;
 font-family: ‘Nunito’, sans-serif;
 font-weight: 700;
 font-size: 14px;
-color: var(–text-mid);
+color: #718096;
 cursor: pointer;
-transition: all 0.2s;
-}
-
-.reset-btn:hover {
-border-color: var(–blue);
-color: var(–blue);
 }
 
 /* FOOTER */
-.footer {
+.ftr {
 text-align: center;
 padding: 16px;
 font-size: 12px;
-color: var(–text-light);
+color: #a0aec0;
 }
 
-.footer strong {
-color: var(–blue);
-}
+.ftr strong { color: #2B5BA8; }
 </style>
 
 </head>
 <body>
-<div class="page-wrapper">
+<div class="wrap">
 
-<div class="header">
-  <div class="logo-area">
-    <div>
-      <div class="brand-name">PG Direct Care</div>
-      <div class="brand-sub">Your Care. Anywhere. When You Need It.</div>
-    </div>
-  </div>
+<div class="hdr">
+  <div class="brand">PG Direct Care</div>
+  <div class="tag">Your Care. Anywhere. When You Need It.</div>
   <h1>Wellness Macro Calculator</h1>
   <p>Get your personalized daily nutrition targets based on your body and goals.</p>
 </div>
 
-<div class="container">
-
-  <!-- INPUT CARD -->
+<div class="body">
 
   <div class="card">
-    <div class="card-title">
-      <div class="icon">📋</div>
-      Your Information
-    </div>
+    <div class="card-title">📋 Your Information</div>
 
 ```
-<div class="field-group">
+<div class="field">
   <label>Biological Sex</label>
   <div class="gender-row">
-    <button class="gender-btn active" id="btn-male" onclick="selectGender('male')">Male</button>
-    <button class="gender-btn" id="btn-female" onclick="selectGender('female')">Female</button>
+    <button class="gbtn on" id="bm" onclick="sg('male')">Male</button>
+    <button class="gbtn" id="bf" onclick="sg('female')">Female</button>
   </div>
 </div>
 
-<div class="field-group">
+<div class="field">
   <label>Age</label>
   <input type="number" id="age" placeholder="Enter your age" min="18" max="100">
 </div>
 
-<div class="field-group">
+<div class="field">
   <label>Height</label>
-  <div class="height-row">
-    <input type="number" id="feet" placeholder="Feet" min="4" max="7">
-    <input type="number" id="inches" placeholder="Inches" min="0" max="11">
+  <div class="two-col">
+    <input type="number" id="ft" placeholder="Feet" min="4" max="7">
+    <input type="number" id="in" placeholder="Inches" min="0" max="11">
   </div>
 </div>
 
-<div class="field-group">
+<div class="field">
   <label>Current Weight (lbs)</label>
-  <input type="number" id="weight" placeholder="Enter your weight">
+  <input type="number" id="wt" placeholder="Enter your weight">
 </div>
 
-<div class="field-group">
+<div class="field">
   <label>Activity Level</label>
-  <div class="select-wrap">
-    <select id="activity">
+  <div class="sel-wrap">
+    <select id="act">
       <option value="">Please select...</option>
       <option value="1.2">Sedentary — Little to no exercise</option>
-      <option value="1.375">Lightly Active — Light exercise 1–2 days/week</option>
-      <option value="1.55">Moderately Active — Moderate exercise 3–5 days/week</option>
-      <option value="1.725">Very Active — Hard exercise 6–7 days/week</option>
+      <option value="1.375">Lightly Active — 1–2 days/week</option>
+      <option value="1.55">Moderately Active — 3–5 days/week</option>
+      <option value="1.725">Very Active — 6–7 days/week</option>
     </select>
   </div>
 </div>
 
-<button class="calc-btn" onclick="calculate()">Calculate My Targets →</button>
+<button class="btn" onclick="calc()">Calculate My Targets →</button>
 ```
 
   </div>
 
-  <!-- RESULTS -->
-
-  <div class="results" id="results">
+  <div class="results" id="res">
 
 ```
-<div class="results-header">
-  <div class="check">✓</div>
+<div class="success-bar">
+  <div class="chk">✓</div>
   <div>
     <h3>Your Personalized Targets</h3>
-    <p>Based on your weight loss goal of ~1–2 lbs/week</p>
+    <p>Based on a ~1–2 lb/week weight loss goal</p>
   </div>
 </div>
 
-<!-- BMI -->
-<div class="bmi-bar-wrap">
+<div class="bmi-card">
   <div class="bmi-top">
     <div>
-      <div class="bmi-label-main">Your BMI</div>
-      <div class="bmi-value-wrap">
-        <div class="bmi-value" id="bmi-display">--</div>
-      </div>
+      <div class="bmi-lbl">Your BMI</div>
+      <div class="bmi-num" id="bmi-val">--</div>
     </div>
-    <div class="bmi-category" id="bmi-category">--</div>
+    <div class="bmi-cat" id="bmi-cat">--</div>
   </div>
-  <div class="bmi-track">
-    <div class="bmi-pointer" id="bmi-pointer" style="left: 0%"></div>
+  <div class="bmi-bar">
+    <div class="bmi-dot" id="bmi-dot" style="left:0%"></div>
   </div>
-  <div class="bmi-scale-labels">
+  <div class="bmi-scale">
     <span>Underweight</span>
     <span>Normal</span>
     <span>Overweight</span>
@@ -740,173 +536,128 @@ color: var(–blue);
   </div>
 </div>
 
-<!-- CALORIES -->
-<div class="macro-grid">
-  <div class="macro-card calories">
-    <div class="value" id="calories-display">--</div>
+<div class="mgrid">
+  <div class="mc cal">
+    <div class="val" id="r-cal">--</div>
     <div class="unit">calories per day</div>
-    <div class="macro-label">Daily Calorie Target</div>
-    <div class="macro-desc">Includes 500 cal/day deficit for ~1 lb/week loss</div>
+    <div class="name">Daily Calorie Target</div>
+    <div class="desc">Includes 500 cal deficit for ~1 lb/week loss</div>
   </div>
-
-  <div class="macro-card">
-    <div class="value" id="protein-display">--</div>
+  <div class="mc">
+    <div class="val" id="r-pro">--</div>
     <div class="unit">grams/day</div>
-    <div class="macro-label">Protein</div>
-    <div class="macro-desc">Muscle preservation priority</div>
+    <div class="name">Protein</div>
+    <div class="desc">Muscle preservation priority</div>
   </div>
-
-  <div class="macro-card">
-    <div class="value" id="carbs-display">--</div>
+  <div class="mc">
+    <div class="val" id="r-carb">--</div>
     <div class="unit">grams/day</div>
-    <div class="macro-label">Carbohydrates</div>
-    <div class="macro-desc">Focus on whole food sources</div>
+    <div class="name">Carbohydrates</div>
+    <div class="desc">Focus on whole food sources</div>
   </div>
-
-  <div class="macro-card">
-    <div class="value" id="fats-display">--</div>
+  <div class="mc">
+    <div class="val" id="r-fat">--</div>
     <div class="unit">grams/day</div>
-    <div class="macro-label">Healthy Fats</div>
-    <div class="macro-desc">Avocado, olive oil, nuts</div>
+    <div class="name">Healthy Fats</div>
+    <div class="desc">Avocado, olive oil, nuts</div>
   </div>
-
-  <div class="macro-card">
-    <div class="value">25</div>
+  <div class="mc">
+    <div class="val">25</div>
     <div class="unit">grams/day</div>
-    <div class="macro-label">Added Sugar Limit</div>
-    <div class="macro-desc">Keep below this daily</div>
+    <div class="name">Added Sugar Limit</div>
+    <div class="desc">Keep below this daily</div>
   </div>
-
 </div>
 
-<!-- PROTEIN TIP -->
-<div class="protein-highlight">
+<div class="tip">
   <h4>💪 Why Protein is Your #1 Priority</h4>
   <p>On weight loss medications, your body can lose muscle alongside fat. Hitting your daily protein target preserves muscle mass, keeps you full longer, and supports your metabolism throughout your journey.</p>
 </div>
 
-<!-- WATER -->
-<div class="water-row">
-  <div class="water-icon">💧</div>
-  <div class="water-text">
+<div class="water">
+  <div class="ico">💧</div>
+  <div>
     <h4>Daily Water Target</h4>
     <p>Half your body weight in ounces</p>
   </div>
-  <div class="water-amount" id="water-display">-- oz</div>
+  <div class="amt" id="r-water">-- oz</div>
 </div>
 
-<!-- DISCLAIMER -->
-<div class="disclaimer">
-  ⚠️ These targets are estimates based on general formulas and are intended as a starting guide only. Your provider may adjust your targets based on your individual health history, medications, and lab results. Always follow your provider's specific recommendations.
-</div>
+<div class="disc">⚠️ These targets are estimates intended as a starting guide only. Your provider may adjust your targets based on your individual health history, medications, and lab results. Always follow your provider's specific recommendations.</div>
 
-<button class="reset-btn" onclick="reset()">← Recalculate</button>
+<button class="reset" onclick="rst()">← Recalculate</button>
 ```
 
   </div>
 
 </div>
 
-<div class="footer">
-  <strong>PG Direct Care</strong> &middot; Your Care. Anywhere. When You Need It.
+<div class="ftr"><strong>PG Direct Care</strong> · Your Care. Anywhere. When You Need It.</div>
+
 </div>
-
 <script>
-  let selectedGender = 'male';
+let sex = 'male';
 
-  function selectGender(g) {
-    selectedGender = g;
-    document.getElementById('btn-male').classList.toggle('active', g === 'male');
-    document.getElementById('btn-female').classList.toggle('active', g === 'female');
-  }
+function sg(s) {
+sex = s;
+document.getElementById(‘bm’).className = ‘gbtn’ + (s===‘male’?’ on’:’’);
+document.getElementById(‘bf’).className = ‘gbtn’ + (s===‘female’?’ on’:’’);
+}
 
-  function calculate() {
-    const age = parseFloat(document.getElementById('age').value);
-    const feet = parseFloat(document.getElementById('feet').value) || 0;
-    const inches = parseFloat(document.getElementById('inches').value) || 0;
-    const weight_lbs = parseFloat(document.getElementById('weight').value);
-    const activity = parseFloat(document.getElementById('activity').value);
+function calc() {
+const age = parseFloat(document.getElementById(‘age’).value);
+const ft = parseFloat(document.getElementById(‘ft’).value)||0;
+const inc = parseFloat(document.getElementById(‘in’).value)||0;
+const wt = parseFloat(document.getElementById(‘wt’).value);
+const act = parseFloat(document.getElementById(‘act’).value);
 
-    if (!age || !feet || !weight_lbs || !activity) {
-      alert('Please fill in all fields to calculate your targets.');
-      return;
-    }
+if (!age||!ft||!wt||!act) { alert(‘Please fill in all fields.’); return; }
 
-    // Convert to metric
-    const weight_kg = weight_lbs * 0.453592;
-    const height_cm = ((feet * 12) + inches) * 2.54;
+const kg = wt * 0.453592;
+const cm = ((ft*12)+inc)*2.54;
+const bmr = sex===‘male’ ? (10*kg)+(6.25*cm)-(5*age)+5 : (10*kg)+(6.25*cm)-(5*age)-161;
+const tdee = bmr * act;
+const cal = Math.round(tdee - 500);
+const pro = Math.round(wt * 0.85);
+const carb = Math.round((cal*0.40)/4);
+const fat = Math.round((cal*0.30)/9);
+const water = Math.round(wt*0.5);
 
-    // Mifflin St Jeor BMR
-    let bmr;
-    if (selectedGender === 'male') {
-      bmr = (10 * weight_kg) + (6.25 * height_cm) - (5 * age) + 5;
-    } else {
-      bmr = (10 * weight_kg) + (6.25 * height_cm) - (5 * age) - 161;
-    }
+const hm = cm/100;
+const bmi = (kg/(hm*hm)).toFixed(1);
 
-    // TDEE with activity factor
-    const tdee = bmr * activity;
+document.getElementById(‘r-cal’).textContent = cal.toLocaleString();
+document.getElementById(‘r-pro’).textContent = pro;
+document.getElementById(‘r-carb’).textContent = carb;
+document.getElementById(‘r-fat’).textContent = fat;
+document.getElementById(‘r-water’).textContent = water+’ oz’;
+document.getElementById(‘bmi-val’).textContent = bmi;
 
-    // Weight loss calories (500 cal deficit)
-    const calories = Math.round(tdee - 500);
+let cat, cc, cb, ptr;
+if (bmi<18.5){cat=‘Underweight’;cc=’#2b6cb0’;cb=’#ebf8ff’;ptr=5;}
+else if (bmi<25){cat=‘Normal Weight’;cc=’#276749’;cb=’#f0fff4’;ptr=25;}
+else if (bmi<30){cat=‘Overweight’;cc=’#744210’;cb=’#fffff0’;ptr=55;}
+else if (bmi<35){cat=‘Obese Class I’;cc=’#c05621’;cb=’#fff5f0’;ptr=72;}
+else{cat=‘Obese Class II+’;cc=’#9b2c2c’;cb=’#fff5f5’;ptr=90;}
 
-    // Macros
-    const protein = Math.round(weight_lbs * 0.85);
-    const carbs = Math.round((calories * 0.40) / 4);
-    const fats = Math.round((calories * 0.30) / 9);
+const ce = document.getElementById(‘bmi-cat’);
+ce.textContent = cat;
+ce.style.background = cb;
+ce.style.color = cc;
+document.getElementById(‘bmi-dot’).style.left = ptr+’%’;
 
-    // Water
-    const water = Math.round(weight_lbs * 0.5);
+const r = document.getElementById(‘res’);
+r.className = ‘results show’;
+r.scrollIntoView({behavior:‘smooth’,block:‘start’});
+}
 
-    // BMI
-    const height_m = height_cm / 100;
-    const bmi = (weight_kg / (height_m * height_m)).toFixed(1);
-
-    // Update displays
-    document.getElementById('calories-display').textContent = calories.toLocaleString();
-    document.getElementById('protein-display').textContent = protein;
-    document.getElementById('carbs-display').textContent = carbs;
-    document.getElementById('fats-display').textContent = fats;
-    document.getElementById('water-display').textContent = water + ' oz';
-    document.getElementById('bmi-display').textContent = bmi;
-
-    // BMI category and color
-    let category, catColor, catBg, pointer;
-    if (bmi < 18.5) {
-      category = 'Underweight'; catColor = '#2b6cb0'; catBg = '#ebf8ff'; pointer = 5;
-    } else if (bmi < 25) {
-      category = 'Normal Weight'; catColor = '#276749'; catBg = '#f0fff4'; pointer = 25;
-    } else if (bmi < 30) {
-      category = 'Overweight'; catColor = '#744210'; catBg = '#fffff0'; pointer = 55;
-    } else if (bmi < 35) {
-      category = 'Obese Class I'; catColor = '#c05621'; catBg = '#fff5f0'; pointer = 72;
-    } else {
-      category = 'Obese Class II+'; catColor = '#9b2c2c'; catBg = '#fff5f5'; pointer = 90;
-    }
-
-    const catEl = document.getElementById('bmi-category');
-    catEl.textContent = category;
-    catEl.style.background = catBg;
-    catEl.style.color = catColor;
-
-    document.getElementById('bmi-pointer').style.left = pointer + '%';
-
-    // Show results
-    document.getElementById('results').classList.add('visible');
-    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  function reset() {
-    document.getElementById('results').classList.remove('visible');
-    document.getElementById('age').value = '';
-    document.getElementById('feet').value = '';
-    document.getElementById('inches').value = '';
-    document.getElementById('weight').value = '';
-    document.getElementById('activity').value = '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+function rst() {
+document.getElementById(‘res’).className = ‘results’;
+[‘age’,‘ft’,‘in’,‘wt’].forEach(id=>document.getElementById(id).value=’’);
+document.getElementById(‘act’).value=’’;
+window.scrollTo({top:0,behavior:‘smooth’});
+}
 </script>
 
-</div><!-- end page-wrapper -->
 </body>
 </html>
