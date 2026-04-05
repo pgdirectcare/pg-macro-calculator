@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PG Wellness Macro Calculator</title>
+<title>PG Wellness Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 <style>
 * {
@@ -387,7 +387,7 @@ body {
 <div class="hdr">
   <div class="brand">PG Direct Care</div>
   <div class="tag">Your Care. Anywhere. When You Need It.</div>
-  <h1>Wellness Macro Calculator</h1>
+  <h1>PG Wellness Hub</h1>
   <p>Get your personalized daily nutrition targets based on your body and goals.</p>
 </div>
 <div class="body">
@@ -487,6 +487,23 @@ body {
         <div class="desc">Added sugars only — not fruit or dairy</div>
       </div>
     </div>
+    <div style="background:white;border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 2px 16px rgba(0,0,0,0.08);border-top:3px solid #2B5BA8;">
+  <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:#2B5BA8;margin-bottom:14px;">🍽️ Protein Per Meal</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+    <div style="background:#f0f4f9;border-radius:12px;padding:12px;text-align:center;">
+      <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:26px;color:#2B5BA8;" id="r-3meals">--</div>
+      <div style="font-size:11px;font-weight:700;color:#718096;">grams per meal</div>
+      <div style="font-size:10px;color:#a0aec0;margin-top:2px;">3 meals a day</div>
+    </div>
+    <div style="background:#f0f4f9;border-radius:12px;padding:12px;text-align:center;">
+      <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:26px;color:#2B5BA8;" id="r-4meals">--</div>
+      <div style="font-size:11px;font-weight:700;color:#718096;">grams per meal</div>
+      <div style="font-size:10px;color:#a0aec0;margin-top:2px;">4 meals a day</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:#4a5568;line-height:1.5;background:#ebf4ff;border-radius:10px;padding:10px;">💡 <strong>Tip:</strong> Spread your protein evenly throughout the day. Your body can only use about 30–40g of protein per meal for muscle building — the rest gets used for energy.</div>
+</div>
+
     <div class="tip">
       <h4>💪 Why Protein is Your #1 Priority</h4>
       <p>On weight loss medications, your body can lose muscle alongside fat. Hitting your daily protein target preserves muscle mass, keeps you full longer, and supports your metabolism throughout your journey.</p>
@@ -533,7 +550,41 @@ body {
   </div>
   <div style="font-size:12px;color:#4a5568;line-height:1.6;">Losing just 5–10% of your body weight can significantly improve: <span style="display:inline-block;background:white;border-radius:20px;padding:3px 10px;margin:2px;font-size:11px;font-weight:700;color:#3d8a2a;">❤️ Blood Pressure</span><span style="display:inline-block;background:white;border-radius:20px;padding:3px 10px;margin:2px;font-size:11px;font-weight:700;color:#3d8a2a;">🩸 Blood Sugar</span><span style="display:inline-block;background:white;border-radius:20px;padding:3px 10px;margin:2px;font-size:11px;font-weight:700;color:#3d8a2a;">💊 Cholesterol</span><span style="display:inline-block;background:white;border-radius:20px;padding:3px 10px;margin:2px;font-size:11px;font-weight:700;color:#3d8a2a;">😴 Sleep</span><span style="display:inline-block;background:white;border-radius:20px;padding:3px 10px;margin:2px;font-size:11px;font-weight:700;color:#3d8a2a;">🦵 Joint Pain</span></div>
 </div>
-<div style="background:white;border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 2px 16px rgba(0,0,0,0.08);">
+<div style="background:white;border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 2px 16px rgba(0,0,0,0.08);border-top:3px solid #5AAD3F;">
+  <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:#2B5BA8;margin-bottom:14px;">📉 Progress Checker</div>
+  <div style="display:flex;gap:10px;margin-bottom:14px;align-items:flex-end;">
+    <div style="flex:1;">
+      <label style="display:block;font-size:12px;font-weight:700;color:#718096;margin-bottom:6px;">Starting Weight (lbs)</label>
+      <input type="number" id="start-wt" placeholder="e.g. 280" style="display:block;width:100%;padding:12px 14px;font-size:16px;font-family:'Lato',sans-serif;color:#1a2744;background:#f0f4f9;border:2px solid #c8d4e4;border-radius:10px;outline:none;">
+    </div>
+    <div style="flex:1;">
+      <label style="display:block;font-size:12px;font-weight:700;color:#718096;margin-bottom:6px;">Current Weight (lbs)</label>
+      <input type="number" id="current-wt" placeholder="e.g. 255" style="display:block;width:100%;padding:12px 14px;font-size:16px;font-family:'Lato',sans-serif;color:#1a2744;background:#f0f4f9;border:2px solid #c8d4e4;border-radius:10px;outline:none;">
+    </div>
+  </div>
+  <button id="progress-btn" style="width:100%;padding:13px;background:#5AAD3F;color:white;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;cursor:pointer;margin-bottom:14px;">Check My Progress</button>
+  <div id="progress-res" style="display:none;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
+      <div style="background:#f0fae8;border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:24px;color:#5AAD3F;" id="p-lost">--</div>
+        <div style="font-size:10px;font-weight:700;color:#718096;text-transform:uppercase;">lbs lost</div>
+      </div>
+      <div style="background:#ebf4ff;border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:24px;color:#2B5BA8;" id="p-pct">--</div>
+        <div style="font-size:10px;font-weight:700;color:#718096;text-transform:uppercase;">% lost</div>
+      </div>
+      <div style="background:#f0f4f9;border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:24px;color:#2B5BA8;" id="p-milestone">--</div>
+        <div style="font-size:10px;font-weight:700;color:#718096;text-transform:uppercase;">milestone</div>
+      </div>
+    </div>
+    <div style="background:#0d2347;border-radius:12px;padding:14px 16px;text-align:center;">
+      <p style="font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:#ffffff;line-height:1.4;" id="p-msg"></p>
+    </div>
+  </div>
+</div>
+
+    <div style="background:white;border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 2px 16px rgba(0,0,0,0.08);">
   <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:#2B5BA8;margin-bottom:14px;">📅 Your Weight Loss Timeline</div>
   <div style="display:flex;gap:10px;margin-bottom:14px;align-items:flex-end;">
     <div style="flex:1;">
@@ -629,6 +680,42 @@ window.addEventListener('DOMContentLoaded', function() {
 document.getElementById('r-bottles').textContent = Math.round(water / 16);
 document.getElementById('r-liters').textContent = (water * 0.0296).toFixed(1);
     document.getElementById('r-sugar').textContent = (sex === 'male') ? 36 : 25;
+    document.getElementById('r-3meals').textContent = Math.round(pro / 3) + 'g';
+document.getElementById('r-4meals').textContent = Math.round(pro / 4) + 'g';
+ document.getElementById('progress-btn').addEventListener('click', function() {
+  var startWt = parseFloat(document.getElementById('start-wt').value);
+  var currentWt = parseFloat(document.getElementById('current-wt').value);
+  if (!startWt || !currentWt || currentWt >= startWt) {
+    alert('Please enter a starting weight higher than your current weight.');
+    return;
+  }
+  var lost = startWt - currentWt;
+  var pct = ((lost / startWt) * 100).toFixed(1);
+  document.getElementById('p-lost').textContent = lost.toFixed(1);
+  document.getElementById('p-pct').textContent = pct + '%';
+  var milestone;
+  if (pct >= 20) { milestone = '🏆 20%'; }
+  else if (pct >= 15) { milestone = '🥇 15%'; }
+  else if (pct >= 10) { milestone = '🥈 10%'; }
+  else if (pct >= 5) { milestone = '🥉 5%'; }
+  else { milestone = '🎯 Keep going!'; }
+  document.getElementById('p-milestone').textContent = milestone;
+  var msg;
+  if (pct >= 20) {
+    msg = '🏆 EXTRAORDINARY! Losing ' + pct + '% of your body weight is a life-changing achievement!';
+  } else if (pct >= 15) {
+    msg = '🌟 AMAZING! ' + pct + '% lost — your health has transformed significantly!';
+  } else if (pct >= 10) {
+    msg = '🎉 INCREDIBLE! Losing ' + pct + '% has dramatically improved your health markers!';
+  } else if (pct >= 5) {
+    msg = '💪 GREAT WORK! Losing ' + pct + '% has already improved your blood pressure, blood sugar and energy!';
+  } else {
+    msg = '🚀 Every pound counts! You\'ve lost ' + lost.toFixed(1) + ' lbs — keep going, you\'re building momentum!';
+  }
+  document.getElementById('p-msg').textContent = msg;
+  document.getElementById('progress-res').style.display = 'block';
+});
+   
 document.getElementById('r-5pct').textContent = Math.round(wt * 0.05) + ' lbs';
 document.getElementById('r-10pct').textContent = Math.round(wt * 0.10) + ' lbs';
 
