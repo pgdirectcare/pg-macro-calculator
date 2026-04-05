@@ -1,1 +1,587 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PG Wellness Macro Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Lato', sans-serif;
+  background: #eef2f7;
+  color: #1a2744;
+}
+.wrap {
+  max-width: 520px;
+  margin: 0 auto;
+}
+.hdr {
+  background: #0d2347;
+  border-bottom: 5px solid #5AAD3F;
+  padding: 30px 20px 36px;
+  text-align: center;
+}
+.hdr .brand {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+.hdr .tag {
+  font-size: 13px;
+  color: #a8c4e8;
+  margin-bottom: 16px;
+}
+.hdr h1 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 28px;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+.hdr p {
+  font-size: 14px;
+  color: #c8d8ee;
+  line-height: 1.5;
+}
+
+
+
+.body {
+  padding: 20px 16px 40px;
+}
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 22px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+.card-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  color: #2B5BA8;
+  margin-bottom: 20px;
+}
+.field {
+  margin-bottom: 18px;
+}
+.field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #4a5568;
+  margin-bottom: 8px;
+}
+.field input,
+.field select {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  color: #1a2744;
+  background: #f0f4f9;
+  border: 2px solid #c8d4e4;
+  border-radius: 10px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field input:focus,
+.field select:focus {
+  border-color: #2B5BA8;
+  background: #ffffff;
+}
+.field input::placeholder {
+  color: #a0aec0;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.gender-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.gbtn {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  text-align: center;
+  border: 2px solid #c8d4e4;
+  border-radius: 10px;
+  background: #f0f4f9;
+  color: #4a5568;
+  cursor: pointer;
+}
+.gbtn.on {
+  background: #2B5BA8;
+  border-color: #2B5BA8;
+  color: #ffffff;
+}
+.sel-wrap {
+  position: relative;
+}
+.sel-wrap::after {
+  content: '▾';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #2B5BA8;
+  pointer-events: none;
+  font-size: 14px;
+}
+.btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: #5AAD3F;
+  color: #ffffff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 6px;
+  box-shadow: 0 4px 14px rgba(90,173,63,0.35);
+}
+
+
+
+.results { display: none; }
+.results.show { display: block; }
+.success-bar {
+  background: #5AAD3F;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.success-bar .chk {
+  width: 38px; height: 38px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  color: white;
+}
+.success-bar h3 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+.success-bar p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+}
+.bmi-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+.bmi-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+.bmi-num {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 36px;
+  color: #2B5BA8;
+  line-height: 1;
+}
+.bmi-lbl {
+  font-size: 12px;
+  font-weight: 700;
+  color: #718096;
+  margin-top: 2px;
+}
+.bmi-cat {
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+}
+.bmi-bar {
+  height: 8px;
+  border-radius: 99px;
+  background: linear-gradient(to right, #63b3ed, #68d391, #f6e05e, #fc8181, #e53e3e);
+  position: relative;
+  margin-bottom: 8px;
+}
+.bmi-dot {
+  position: absolute;
+  top: -5px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: #2B5BA8;
+  border: 3px solid white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  transform: translateX(-50%);
+  transition: left 0.5s;
+}
+.bmi-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #a0aec0;
+  font-weight: 700;
+}
+
+
+.mgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.mc {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px 12px;
+  text-align: center;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  border-top: 3px solid #2B5BA8;
+}
+.mc.cal {
+  grid-column: 1 / -1;
+  border-top-color: #5AAD3F;
+  background: linear-gradient(135deg, #f0fae8, #e4f5d8);
+}
+.mc .val {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 30px;
+  color: #2B5BA8;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+.mc.cal .val {
+  font-size: 38px;
+  color: #3d8a2a;
+}
+.mc .unit {
+  font-size: 12px;
+  font-weight: 700;
+  color: #a0aec0;
+  margin-bottom: 5px;
+}
+.mc .name {
+  font-size: 11px;
+  font-weight: 700;
+  color: #4a5568;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.mc .desc {
+  font-size: 10px;
+  color: #a0aec0;
+  margin-top: 2px;
+}
+.tip {
+  background: #ebf4ff;
+  border-left: 4px solid #2B5BA8;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+.tip h4 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  color: #2B5BA8;
+  margin-bottom: 4px;
+}
+.tip p {
+  font-size: 12px;
+  color: #4a5568;
+  line-height: 1.5;
+}
+.water {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+.water .ico { font-size: 28px; }
+.water h4 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: #2B5BA8;
+}
+.water p { font-size: 12px; color: #a0aec0; }
+.water .amt {
+  margin-left: auto;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  color: #2B5BA8;
+  white-space: nowrap;
+}
+.disc {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: #92400e;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.reset {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 2px solid #c8d4e4;
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #718096;
+  cursor: pointer;
+}
+.ftr {
+  text-align: center;
+  padding: 16px;
+  font-size: 12px;
+  color: #a0aec0;
+}
+.ftr strong { color: #2B5BA8; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hdr">
+  <div class="brand">PG Direct Care</div>
+  <div class="tag">Your Care. Anywhere. When You Need It.</div>
+  <h1>Wellness Macro Calculator</h1>
+  <p>Get your personalized daily nutrition targets based on your body and goals.</p>
+</div>
+<div class="body">
+  <div class="card">
+    <div class="card-title">📋 Your Information</div>
+    <div class="field">
+      <label>Biological Sex</label>
+      <div class="gender-row">
+        <button class="gbtn on" id="bm">Male</button>
+        <button class="gbtn" id="bf">Female</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Age</label>
+      <input type="number" id="age" placeholder="Enter your age" min="18" max="100">
+    </div>
+    <div class="field">
+      <label>Height</label>
+      <div class="two-col">
+        <input type="number" id="ft" placeholder="Feet" min="4" max="7">
+        <input type="number" id="in" placeholder="Inches" min="0" max="11">
+      </div>
+    </div>
+    <div class="field">
+      <label>Current Weight (lbs)</label>
+      <input type="number" id="wt" placeholder="Enter your weight">
+    </div>
+    <div class="field">
+      <label>Activity Level</label>
+      <div class="sel-wrap">
+        <select id="act">
+          <option value="">Please select...</option>
+          <option value="1.2">Sedentary — Little to no exercise</option>
+          <option value="1.375">Lightly Active — 1–2 days/week</option>
+          <option value="1.55">Moderately Active — 3–5 days/week</option>
+          <option value="1.725">Very Active — 6–7 days/week</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn" id="calcbtn">Calculate My Targets →</button>
+  </div>
+  <div class="results" id="res">
+    <div class="success-bar">
+      <div class="chk">✓</div>
+      <div>
+        <h3>Your Personalized Targets</h3>
+        <p>Based on a ~1–2 lb/week weight loss goal</p>
+      </div>
+    </div>
+    <div class="bmi-card">
+      <div class="bmi-top">
+        <div>
+          <div class="bmi-lbl">Your BMI</div>
+          <div class="bmi-num" id="bmi-val">--</div>
+        </div>
+        <div class="bmi-cat" id="bmi-cat">--</div>
+      </div>
+      <div class="bmi-bar">
+        <div class="bmi-dot" id="bmi-dot" style="left:0%"></div>
+      </div>
+      <div class="bmi-scale">
+        <span>Underweight</span>
+        <span>Normal</span>
+        <span>Overweight</span>
+        <span>Obese</span>
+      </div>
+    </div>
+    <div class="mgrid">
+      <div class="mc cal">
+        <div class="val" id="r-cal">--</div>
+        <div class="unit">calories per day</div>
+        <div class="name">Daily Calorie Target</div>
+        <div class="desc">Includes 500 cal deficit for ~1 lb/week loss</div>
+      </div>
+      <div class="mc">
+        <div class="val" id="r-pro">--</div>
+        <div class="unit">grams/day</div>
+        <div class="name">Protein</div>
+        <div class="desc">Muscle preservation priority</div>
+      </div>
+      <div class="mc">
+        <div class="val" id="r-carb">--</div>
+        <div class="unit">grams/day</div>
+        <div class="name">Carbohydrates</div>
+        <div class="desc">Focus on whole food sources</div>
+      </div>
+      <div class="mc">
+        <div class="val" id="r-fat">--</div>
+        <div class="unit">grams/day</div>
+        <div class="name">Healthy Fats</div>
+        <div class="desc">Avocado, olive oil, nuts</div>
+      </div>
+      <div class="mc">
+        <div class="val">25</div>
+        <div class="unit">grams/day</div>
+        <div class="name">Added Sugar Limit</div>
+        <div class="desc">Keep below this daily</div>
+      </div>
+    </div>
+    <div class="tip">
+      <h4>💪 Why Protein is Your #1 Priority</h4>
+      <p>On weight loss medications, your body can lose muscle alongside fat. Hitting your daily protein target preserves muscle mass, keeps you full longer, and supports your metabolism throughout your journey.</p>
+    </div>
+    <div class="water">
+      <div class="ico">💧</div>
+      <div>
+        <h4>Daily Water Target</h4>
+        <p>Half your body weight in ounces</p>
+      </div>
+      <div class="amt" id="r-water">-- oz</div>
+    </div>
+    <div class="disc">⚠️ These targets are estimates intended as a starting guide only​​​​​​​​​​​​​​​​
+<script>
+var sex = 'male';
+
+window.addEventListener('DOMContentLoaded', function() {
+
+  document.getElementById('bm').addEventListener('click', function() {
+    sex = 'male';
+    document.getElementById('bm').className = 'gbtn on';
+    document.getElementById('bf').className = 'gbtn';
+  });
+
+  document.getElementById('bf').addEventListener('click', function() {
+    sex = 'female';
+    document.getElementById('bm').className = 'gbtn';
+    document.getElementById('bf').className = 'gbtn on';
+  });
+
+  document.getElementById('calcbtn').addEventListener('click', function() {
+    var age = parseFloat(document.getElementById('age').value);
+    var ft = parseFloat(document.getElementById('ft').value) || 0;
+    var inc = parseFloat(document.getElementById('in').value) || 0;
+    var wt = parseFloat(document.getElementById('wt').value);
+    var act = parseFloat(document.getElementById('act').value);
+
+    if (!age || !ft || !wt || !act) {
+      alert('Please fill in all fields before calculating.');
+      return;
+    }
+
+    var kg = wt * 0.453592;
+    var cm = ((ft * 12) + inc) * 2.54;
+    var bmr;
+    if (sex === 'male') {
+      bmr = (10 * kg) + (6.25 * cm) - (5 * age) + 5;
+    } else {
+      bmr = (10 * kg) + (6.25 * cm) - (5 * age) - 161;
+    }
+
+    var tdee = bmr * act;
+    var cal = Math.round(tdee - 500);
+    var pro = Math.round(wt * 0.85);
+    var carb = Math.round((cal * 0.40) / 4);
+    var fat = Math.round((cal * 0.30) / 9);
+    var water = Math.round(wt * 0.5);
+    var hm = cm / 100;
+    var bmi = (kg / (hm * hm)).toFixed(1);
+
+    document.getElementById('r-cal').textContent = cal.toLocaleString();
+    document.getElementById('r-pro').textContent = pro;
+    document.getElementById('r-carb').textContent = carb;
+    document.getElementById('r-fat').textContent = fat;
+    document.getElementById('r-water').textContent = water + ' oz';
+    document.getElementById('bmi-val').textContent = bmi;
+    var cat, cc, cb, ptr;
+    if (bmi < 18.5) { cat = 'Underweight'; cc = '#2b6cb0'; cb = '#ebf8ff'; ptr = 5; }
+    else if (bmi < 25) { cat = 'Normal Weight'; cc = '#276749'; cb = '#f0fff4'; ptr = 25; }
+    else if (bmi < 30) { cat = 'Overweight'; cc = '#744210'; cb = '#fffff0'; ptr = 55; }
+    else if (bmi < 35) { cat = 'Obese Class I'; cc = '#c05621'; cb = '#fff5f0'; ptr = 72; }
+    else { cat = 'Obese Class II+'; cc = '#9b2c2c'; cb = '#fff5f5'; ptr = 90; }
+
+    var ce = document.getElementById('bmi-cat');
+    ce.textContent = cat;
+    ce.style.background = cb;
+    ce.style.color = cc;
+    document.getElementById('bmi-dot').style.left = ptr + '%';
+
+    var r = document.getElementById('res');
+    r.className = 'results show';
+    r.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.getElementById('rstbtn').addEventListener('click', function() {
+    document.getElementById('res').className = 'results';
+    var fields = ['age', 'ft', 'in', 'wt'];
+    for (var i = 0; i < fields.length; i++) {
+      document.getElementById(fields[i]).value = '';
+    }
+    document.getElementById('act').value = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+});
+</script>
+</body>
+</html>
