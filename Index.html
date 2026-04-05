@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PG Wellness Macro Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #2B5BA8;
+    --blue-dark: #1e4280;
+    --blue-light: #3d6ec2;
+    --green: #5AAD3F;
+    --green-dark: #3d8a2a;
+    --green-light: #6fc452;
+    --white: #ffffff;
+    --gray-light: #f4f7fb;
+    --gray: #e2e8f0;
+    --text-dark: #1a2744;
+    --text-mid: #4a5568;
+    --text-light: #718096;
+    --shadow: 0 4px 24px rgba(43,91,168,0.10);
+    --shadow-lg: 0 8px 40px rgba(43,91,168,0.16);
+  }
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+font-family: ‘Lato’, sans-serif;
+background: var(–gray-light);
+min-height: 100vh;
+color: var(–text-dark);
+width: 100%;
+margin: 0;
+padding: 0;
+}
+
+.page-wrapper {
+max-width: 600px;
+margin: 0 auto;
+background: var(–gray-light);
+min-height: 100vh;
+box-shadow: 0 0 40px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+.header {
+background: linear-gradient(135deg, #1a3a6e 0%, var(–blue) 50%, var(–blue-light) 100%);
+padding: 32px 24px 40px;
+text-align: center;
+position: relative;
+overflow: hidden;
+border-bottom: 4px solid var(–green);
+}
+
+.header::before {
+content: ‘’;
+position: absolute;
+top: -40px; right: -40px;
+width: 180px; height: 180px;
+border-radius: 50%;
+background: rgba(90,173,63,0.15);
+}
+
+.header::after {
+content: ‘’;
+position: absolute;
+bottom: -60px; left: -30px;
+width: 220px; height: 220px;
+border-radius: 50%;
+background: rgba(255,255,255,0.06);
+}
+
+.logo-area {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+margin-bottom: 10px;
+}
+
+.logo-badge {
+background: var(–green);
+color: white;
+font-family: ‘Nunito’, sans-serif;
+font-weight: 900;
+font-size: 20px;
+width: 44px; height: 44px;
+border-radius: 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow: 0 2px 12px rgba(90,173,63,0.4);
+flex-shrink: 0;
+}
+
+.brand-name {
+font-family: ‘Nunito’, sans-serif;
+font-weight: 900;
+font-size: 24px;
+color: white;
+line-height: 1;
+white-space: nowrap;
+text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.brand-sub {
+font-size: 11px;
+font-weight: 600;
+color: rgba(255,255,255,0.82);
+letter-spacing: 0.3px;
+margin-top: 2px;
+}
+
+.header h1 {
+font-family: ‘Nunito’, sans-serif;
+font-weight: 900;
+font-size: 26px;
+color: #ffffff;
+text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+margin-bottom: 8px;
+position: relative;
+z-index: 1;
+}
+
+.header p {
+font-size: 14px;
+color: rgba(255,255,255,0.92);
+text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+position: relative;
+z-index: 1;
+max-width: 320px;
+margin: 0 auto;
+line-height: 1.5;
+}
+
+/* MAIN */
+.container {
+max-width: 480px;
+margin: 0 auto;
+padding: 20px 16px 40px;
+}
+
+/* CARD */
+.card {
+background: white;
+border-radius: 20px;
+padding: 24px 20px;
+box-shadow: var(–shadow);
+margin-bottom: 16px;
+}
+
+.card-title {
+font-family: ‘Nunito’, sans-serif;
+font-weight: 800;
+font-size: 16px;
+color: var(–blue);
+margin-bottom: 18px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.card-title .icon {
+width: 28px; height: 28px;
+border-radius: 8px;
+background: var(–gray-light);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 14px;
+}
+
+/* FORM FIELDS */
+.field-group {
+margin-bottom: 16px;
+}
+
+label {
+display: block;
+font-size: 13px;
+font-weight: 700;
+color: var(–text-mid);
+margin-bottom: 6px;
+letter-spacing: 0.3px;
+}
+
+input[type=“number”],
+select {
+width: 100%;
+padding: 12px 14px;
+border: 2px solid var(–gray);
+border-radius: 12px;
+font-size: 15px;
+font-family: ‘Lato’, sans-serif;
+color: var(–text-dark);
+background: var(–gray-light);
+transition: border-color 0.2s, background 0.2s;
+appearance: none;
+-webkit-appearance: none;
+}
+
+input[type=“number”]:focus,
+select:focus {
+outline: none;
+border-color: var(–blue);
+background: white;
+}
+
+.select-wrap {
+position: relative;
+}
+
+.select-wrap::after {
+content: ‘▾’;
+position: absolute;
+right: 14px;
+top: 50%;
+transform: translateY(-50%);
+color: var(–blue);
+font-size: 14px;
+pointer-events: none;
+}
+
+.height-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+}
+
+.gender-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+}
+
+.gender-btn {
+padding: 11px;
+border: 2px solid var(–gray);
+border-radius: 12px;
+background: var(–gray-light);
+font-size: 14px;
+font-weight: 700;
+font-family: ‘Nunito’, sans-serif;
+color: var(–text-mid);
+cursor: pointer;
+transition: all 0.2s;
+text-align: center;
+}
+
+.gender-btn.active {
+border-color: var(–blue);
+background: var(–blue);
+color: white;
+}
+
+/* CALCULATE BUTTON */
+.calc-btn {
+width: 100%;
+padding: 15px;
+background: linear-gradient(135deg, var(–green) 0%, var(–green-dark) 100%);
+color: white;
+border: none;
+border-radius: 14px;
+font-family: ‘Nunito’, sans-serif;
+font-weight: 900;
+font-size: 17px;
+cursor: pointer;
+letter-spacing: 0.3px;
+box-shadow: 0 4px 16px rgba(90,173,63,0.35);
+transition: transform 0.15s, box-shadow 0.15s;
+margin-top: 4px;
+}
+
+.calc-btn:active {
+transform: translateY(1px);
+box-shadow: 0 2px 8px rgba(90,173,63,0.25);
+}
+
+/* RESULTS */
+.results {
+display: none;
+}
+
+.results.visible {
+display: block;
+animation: fadeUp 0.4s ease;
+}
+
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(16px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.results-header {
+background: linear-gradient(135deg, var(–green) 0%, var(–green-dark) 100%);
+border-radius: 16px;
+padding: 18px 20px;
+margin-bottom: 16px;
+display: flex;
+align-items: center;
+gap: 12px;
+box-shadow: 0 4px 16px rgba(90,173,63,0.25);
+}
+
+.results-header .check {
+width: 40px; height: 40px;
+background: rgba(255,255,255,0.2);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 20px;
+flex-shrink: 0;
+}
+
+.results-header h3 {
+font-family: ‘Nunito’, sans-serif;
+font-weight: 800;
+font-size: 16px;
+color: white;
+margin-bottom: 2px;
+}
+
+.results-header p {
+font-size: 13px;
+color: rgba(255,255,255,0.85);
+}
+
+/* MACRO GRID */
+.macro-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+margin-bottom: 16px;
+}
+
+.macro-card {
+background: white;
+border-radius: 16px;
+padding: 16px 14px;
+box-shadow: var(–shadow);
+text-align: center;
+border-top: 3px solid var(–blue);
+transition: transform 0.2s;
+}
+
+.macro-card:hover {
+transform: translateY(-2px);
+}
+
+.macro-card.calories {
+grid-column: 1 / -1;
+border-top-color: var(–green);
+background: linear-gradient(135deg, #f0f9eb 0%, #e8f5e0 100%);
+}
+
+.macro-card .value {
+font-family: ‘Nunito’, sans-serif;
+font-weight: 900;
+font-size: 28px;
+color: var(–blue);
+line-height: 1;
+margin-bottom: 4px;
+}
+
+.macro-card.calories .value {
+font-size: 36px;
+color: var(–green-dark);
+}
+
+.macro-card .unit {
+font-size: 13px;
+font-weight: 700;
+color: var(–text-light);
+margin-bottom: 6px;
+}
+
+.macro-card .macro-label {
+font-size: 12px;
+font-weight: 700;
+color: var(–text-mid);
+letter-spacing: 0.5px;
+text-transform: uppercase;
+}
+
+.macro-card .macro-desc {
+font-size: 11px;
+color: var(–text-light);
+margin-top: 3px;
+}
+
+/* BMI DISPLAY */
+.bmi-bar-wrap {
+background: white;
+border-radius: 16px;
+padding: 18px 16px;
+box-shadow: var(–shadow);
+margin-bottom: 16px;
+}
+
+.bmi-top {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 12px;
+}
+
+.bmi-value-wrap {
+display: flex;
+align-items: baseline;
+gap: 4px;
+}
+
+.bmi-value {
+font-family: ‘Nunito’, sans-serif;
+font-weight: 900;
+font-size: 32px;
+color: var(–blue);
+}
+
+.bmi-label-main {
+font-family: ‘Nunito’, sans-serif;
+font-weight: 800;
+font-size: 13px;
+color: var(–text-mid);
+}
+
+.bmi-category {
+display: inline-block;
+padding: 4px 12px;
+border-radius: 20px;
+font-size: 12px;
+font-weight: 700;
+font-family: ‘Nunito’, sans-serif;
+}
+
+.bmi-track {
+height: 8px;
+border-radius: 99px;
+background: linear-gradient(to right, #63b3ed, #68d391, #f6e05e, #fc8181, #e53e3e);
+position: relative;
+margin-bottom: 8px;
+}
+
+.bmi-pointer {
+position: absolute;
+top: -4px;
+width: 16px; height: 16px;
+border-radius: 50%;
+background: var(–blue);
+border: 2px solid white;
+box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+transform: translateX(-50%);
+transition: left 0.5s ease;
+}
+
+.bmi-scale-labels {
+display: flex;
+justify-content: space-between;
+font-size: 10px;
+color: var(–text-light);
+font-weight: 700;
+}
+
+/* PROTEIN HIGHLIGHT */
+.protein-highlight {
+background: linear-gradient(135deg, #ebf4ff 0%, #dbeafe 100%);
+border-radius: 14px;
+padding: 14px 16px;
+margin-bottom: 16px;
+border-left: 4px solid var(–blue);
+}
+
+.protein-highlight h4 {
+font-family: ‘Nunito’, sans-serif;
+font-weight: 800;
+font-size: 13px;
+color: var(–blue);
+margin-bottom: 4px;
+}
+
+.protein-highlight p {
+font-size: 12px;
+color: var(–text-mid);
+line-height: 1.5;
+}
+
+/* WATER ROW */
+.water-row {
+background: white;
+border-radius: 14px;
+padding: 14px 16px;
+box-shadow: var(–shadow);
+display: flex;
+align-items: center;
+gap: 14px;
+margin-bottom: 16px;
+}
+
+.water-icon {
+font-size: 28px;
+flex-shrink: 0;
+}
+
+.water-text h4 {
+font-family: ‘Nunito’, sans-serif;
+font-weight: 800;
+font-size: 14px;
+color: var(–blue);
+}
+
+.water-text p {
+font-size: 12px;
+color: var(–text-light);
+}
+
+.water-amount {
+margin-left: auto;
+font-family: ‘Nunito’, sans-serif;
+font-weight: 900;
+font-size: 22px;
+color: var(–blue);
+white-space: nowrap;
+}
+
+/* DISCLAIMER */
+.disclaimer {
+background: #fffbeb;
+border: 1px solid #fde68a;
+border-radius: 12px;
+padding: 12px 14px;
+font-size: 12px;
+color: #92400e;
+line-height: 1.5;
+margin-bottom: 16px;
+}
+
+/* RESET */
+.reset-btn {
+width: 100%;
+padding: 12px;
+background: transparent;
+border: 2px solid var(–gray);
+border-radius: 12px;
+font-family: ‘Nunito’, sans-serif;
+font-weight: 700;
+font-size: 14px;
+color: var(–text-mid);
+cursor: pointer;
+transition: all 0.2s;
+}
+
+.reset-btn:hover {
+border-color: var(–blue);
+color: var(–blue);
+}
+
+/* FOOTER */
+.footer {
+text-align: center;
+padding: 16px;
+font-size: 12px;
+color: var(–text-light);
+}
+
+.footer strong {
+color: var(–blue);
+}
+</style>
+
+</head>
+<body>
+<div class="page-wrapper">
+
+<div class="header">
+  <div class="logo-area">
+    <div>
+      <div class="brand-name">PG Direct Care</div>
+      <div class="brand-sub">Your Care. Anywhere. When You Need It.</div>
+    </div>
+  </div>
+  <h1>Wellness Macro Calculator</h1>
+  <p>Get your personalized daily nutrition targets based on your body and goals.</p>
+</div>
+
+<div class="container">
+
+  <!-- INPUT CARD -->
+
+  <div class="card">
+    <div class="card-title">
+      <div class="icon">📋</div>
+      Your Information
+    </div>
+
+```
+<div class="field-group">
+  <label>Biological Sex</label>
+  <div class="gender-row">
+    <button class="gender-btn active" id="btn-male" onclick="selectGender('male')">Male</button>
+    <button class="gender-btn" id="btn-female" onclick="selectGender('female')">Female</button>
+  </div>
+</div>
+
+<div class="field-group">
+  <label>Age</label>
+  <input type="number" id="age" placeholder="Enter your age" min="18" max="100">
+</div>
+
+<div class="field-group">
+  <label>Height</label>
+  <div class="height-row">
+    <input type="number" id="feet" placeholder="Feet" min="4" max="7">
+    <input type="number" id="inches" placeholder="Inches" min="0" max="11">
+  </div>
+</div>
+
+<div class="field-group">
+  <label>Current Weight (lbs)</label>
+  <input type="number" id="weight" placeholder="Enter your weight">
+</div>
+
+<div class="field-group">
+  <label>Activity Level</label>
+  <div class="select-wrap">
+    <select id="activity">
+      <option value="">Please select...</option>
+      <option value="1.2">Sedentary — Little to no exercise</option>
+      <option value="1.375">Lightly Active — Light exercise 1–2 days/week</option>
+      <option value="1.55">Moderately Active — Moderate exercise 3–5 days/week</option>
+      <option value="1.725">Very Active — Hard exercise 6–7 days/week</option>
+    </select>
+  </div>
+</div>
+
+<button class="calc-btn" onclick="calculate()">Calculate My Targets →</button>
+```
+
+  </div>
+
+  <!-- RESULTS -->
+
+  <div class="results" id="results">
+
+```
+<div class="results-header">
+  <div class="check">✓</div>
+  <div>
+    <h3>Your Personalized Targets</h3>
+    <p>Based on your weight loss goal of ~1–2 lbs/week</p>
+  </div>
+</div>
+
+<!-- BMI -->
+<div class="bmi-bar-wrap">
+  <div class="bmi-top">
+    <div>
+      <div class="bmi-label-main">Your BMI</div>
+      <div class="bmi-value-wrap">
+        <div class="bmi-value" id="bmi-display">--</div>
+      </div>
+    </div>
+    <div class="bmi-category" id="bmi-category">--</div>
+  </div>
+  <div class="bmi-track">
+    <div class="bmi-pointer" id="bmi-pointer" style="left: 0%"></div>
+  </div>
+  <div class="bmi-scale-labels">
+    <span>Underweight</span>
+    <span>Normal</span>
+    <span>Overweight</span>
+    <span>Obese</span>
+  </div>
+</div>
+
+<!-- CALORIES -->
+<div class="macro-grid">
+  <div class="macro-card calories">
+    <div class="value" id="calories-display">--</div>
+    <div class="unit">calories per day</div>
+    <div class="macro-label">Daily Calorie Target</div>
+    <div class="macro-desc">Includes 500 cal/day deficit for ~1 lb/week loss</div>
+  </div>
+
+  <div class="macro-card">
+    <div class="value" id="protein-display">--</div>
+    <div class="unit">grams/day</div>
+    <div class="macro-label">Protein</div>
+    <div class="macro-desc">Muscle preservation priority</div>
+  </div>
+
+  <div class="macro-card">
+    <div class="value" id="carbs-display">--</div>
+    <div class="unit">grams/day</div>
+    <div class="macro-label">Carbohydrates</div>
+    <div class="macro-desc">Focus on whole food sources</div>
+  </div>
+
+  <div class="macro-card">
+    <div class="value" id="fats-display">--</div>
+    <div class="unit">grams/day</div>
+    <div class="macro-label">Healthy Fats</div>
+    <div class="macro-desc">Avocado, olive oil, nuts</div>
+  </div>
+
+  <div class="macro-card">
+    <div class="value">25</div>
+    <div class="unit">grams/day</div>
+    <div class="macro-label">Added Sugar Limit</div>
+    <div class="macro-desc">Keep below this daily</div>
+  </div>
+
+</div>
+
+<!-- PROTEIN TIP -->
+<div class="protein-highlight">
+  <h4>💪 Why Protein is Your #1 Priority</h4>
+  <p>On weight loss medications, your body can lose muscle alongside fat. Hitting your daily protein target preserves muscle mass, keeps you full longer, and supports your metabolism throughout your journey.</p>
+</div>
+
+<!-- WATER -->
+<div class="water-row">
+  <div class="water-icon">💧</div>
+  <div class="water-text">
+    <h4>Daily Water Target</h4>
+    <p>Half your body weight in ounces</p>
+  </div>
+  <div class="water-amount" id="water-display">-- oz</div>
+</div>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+  ⚠️ These targets are estimates based on general formulas and are intended as a starting guide only. Your provider may adjust your targets based on your individual health history, medications, and lab results. Always follow your provider's specific recommendations.
+</div>
+
+<button class="reset-btn" onclick="reset()">← Recalculate</button>
+```
+
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>PG Direct Care</strong> &middot; Your Care. Anywhere. When You Need It.
+</div>
+
+<script>
+  let selectedGender = 'male';
+
+  function selectGender(g) {
+    selectedGender = g;
+    document.getElementById('btn-male').classList.toggle('active', g === 'male');
+    document.getElementById('btn-female').classList.toggle('active', g === 'female');
+  }
+
+  function calculate() {
+    const age = parseFloat(document.getElementById('age').value);
+    const feet = parseFloat(document.getElementById('feet').value) || 0;
+    const inches = parseFloat(document.getElementById('inches').value) || 0;
+    const weight_lbs = parseFloat(document.getElementById('weight').value);
+    const activity = parseFloat(document.getElementById('activity').value);
+
+    if (!age || !feet || !weight_lbs || !activity) {
+      alert('Please fill in all fields to calculate your targets.');
+      return;
+    }
+
+    // Convert to metric
+    const weight_kg = weight_lbs * 0.453592;
+    const height_cm = ((feet * 12) + inches) * 2.54;
+
+    // Mifflin St Jeor BMR
+    let bmr;
+    if (selectedGender === 'male') {
+      bmr = (10 * weight_kg) + (6.25 * height_cm) - (5 * age) + 5;
+    } else {
+      bmr = (10 * weight_kg) + (6.25 * height_cm) - (5 * age) - 161;
+    }
+
+    // TDEE with activity factor
+    const tdee = bmr * activity;
+
+    // Weight loss calories (500 cal deficit)
+    const calories = Math.round(tdee - 500);
+
+    // Macros
+    const protein = Math.round(weight_lbs * 0.85);
+    const carbs = Math.round((calories * 0.40) / 4);
+    const fats = Math.round((calories * 0.30) / 9);
+
+    // Water
+    const water = Math.round(weight_lbs * 0.5);
+
+    // BMI
+    const height_m = height_cm / 100;
+    const bmi = (weight_kg / (height_m * height_m)).toFixed(1);
+
+    // Update displays
+    document.getElementById('calories-display').textContent = calories.toLocaleString();
+    document.getElementById('protein-display').textContent = protein;
+    document.getElementById('carbs-display').textContent = carbs;
+    document.getElementById('fats-display').textContent = fats;
+    document.getElementById('water-display').textContent = water + ' oz';
+    document.getElementById('bmi-display').textContent = bmi;
+
+    // BMI category and color
+    let category, catColor, catBg, pointer;
+    if (bmi < 18.5) {
+      category = 'Underweight'; catColor = '#2b6cb0'; catBg = '#ebf8ff'; pointer = 5;
+    } else if (bmi < 25) {
+      category = 'Normal Weight'; catColor = '#276749'; catBg = '#f0fff4'; pointer = 25;
+    } else if (bmi < 30) {
+      category = 'Overweight'; catColor = '#744210'; catBg = '#fffff0'; pointer = 55;
+    } else if (bmi < 35) {
+      category = 'Obese Class I'; catColor = '#c05621'; catBg = '#fff5f0'; pointer = 72;
+    } else {
+      category = 'Obese Class II+'; catColor = '#9b2c2c'; catBg = '#fff5f5'; pointer = 90;
+    }
+
+    const catEl = document.getElementById('bmi-category');
+    catEl.textContent = category;
+    catEl.style.background = catBg;
+    catEl.style.color = catColor;
+
+    document.getElementById('bmi-pointer').style.left = pointer + '%';
+
+    // Show results
+    document.getElementById('results').classList.add('visible');
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function reset() {
+    document.getElementById('results').classList.remove('visible');
+    document.getElementById('age').value = '';
+    document.getElementById('feet').value = '';
+    document.getElementById('inches').value = '';
+    document.getElementById('weight').value = '';
+    document.getElementById('activity').value = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</div><!-- end page-wrapper -->
+</body>
+</html>
