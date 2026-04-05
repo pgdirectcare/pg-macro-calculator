@@ -499,7 +499,28 @@ body {
       </div>
       <div class="amt" id="r-water">-- oz</div>
     </div>
-    <div class="disc">⚠️ These targets are estimates intended as a starting guide only​​​​​​​​​​​​​​​​
+    <div style="background:#f0f4f9;border-radius:0 0 14px 14px;padding:12px 16px;margin-top:-16px;margin-bottom:16px;border-top:1px solid #e2e8f0;">
+  <div style="font-size:11px;font-weight:700;color:#718096;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">That's equal to...</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <div style="flex:1;background:white;border-radius:10px;padding:10px;text-align:center;box-shadow:0 1px 6px rgba(0,0,0,0.06);">
+      <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:22px;color:#2B5BA8;" id="r-cups">--</div>
+      <div style="font-size:11px;color:#a0aec0;font-weight:700;">cups</div>
+      <div style="font-size:10px;color:#cbd5e0;">(8 oz each)</div>
+    </div>
+    <div style="flex:1;background:white;border-radius:10px;padding:10px;text-align:center;box-shadow:0 1px 6px rgba(0,0,0,0.06);">
+      <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:22px;color:#2B5BA8;" id="r-bottles">--</div>
+      <div style="font-size:11px;color:#a0aec0;font-weight:700;">bottles</div>
+      <div style="font-size:10px;color:#cbd5e0;">(16 oz bottle)</div>
+    </div>
+    <div style="flex:1;background:white;border-radius:10px;padding:10px;text-align:center;box-shadow:0 1px 6px rgba(0,0,0,0.06);">
+      <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:22px;color:#2B5BA8;" id="r-liters">--</div>
+      <div style="font-size:11px;color:#a0aec0;font-weight:700;">liters</div>
+      <div style="font-size:10px;color:#cbd5e0;">(metric)</div>
+    </div>
+  </div>
+</div>
+
+    <div class="disc">⚠️ These targets are personalized to your body and goals.  For adjustments based on your medications or health history, reach out to your provider anytime.</div>​​​
 <script>
 var sex = 'male';
 
@@ -552,6 +573,10 @@ window.addEventListener('DOMContentLoaded', function() {
     document.getElementById('r-carb').textContent = carb;
     document.getElementById('r-fat').textContent = fat;
     document.getElementById('r-water').textContent = water + ' oz';
+    document.getElementById('r-cups').textContent = Math.round(water / 8);
+document.getElementById('r-bottles').textContent = Math.round(water / 16);
+document.getElementById('r-liters').textContent = (water * 0.0296).toFixed(1);
+
     document.getElementById('bmi-val').textContent = bmi;
     var cat, cc, cb, ptr;
     if (bmi < 18.5) { cat = 'Underweight'; cc = '#2b6cb0'; cb = '#ebf8ff'; ptr = 5; }
@@ -583,5 +608,6 @@ window.addEventListener('DOMContentLoaded', function() {
 
 });
 </script>
+<div class="ftr"><strong>PG Direct Care</strong> · <a href="https://www.pgdirectcare.com" style="color:#2B5BA8;text-decoration:none;">pgdirectcare.com</a> · Your Care. Anywhere. When You Need It.</div>
 </body>
 </html>
