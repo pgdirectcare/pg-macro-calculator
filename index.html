@@ -481,10 +481,10 @@ body {
         <div class="desc">Avocado, olive oil, nuts</div>
       </div>
       <div class="mc">
-        <div class="val">25</div>
+        <div class="val" id="r-sugar">--</div>
         <div class="unit">grams/day</div>
         <div class="name">Added Sugar Limit</div>
-        <div class="desc">Keep below this daily</div>
+        <div class="desc">Added sugars only — not fruit or dairy</div>
       </div>
     </div>
     <div class="tip">
@@ -576,6 +576,8 @@ window.addEventListener('DOMContentLoaded', function() {
     document.getElementById('r-cups').textContent = Math.round(water / 8);
 document.getElementById('r-bottles').textContent = Math.round(water / 16);
 document.getElementById('r-liters').textContent = (water * 0.0296).toFixed(1);
+    document.getElementById('r-sugar').textContent = (sex === 'male') ? 36 : 25;
+
 
     document.getElementById('bmi-val').textContent = bmi;
     var cat, cc, cb, ptr;
